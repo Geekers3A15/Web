@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire index{% endblock %}
+
+{% block body %}
+    <h1>Formulaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdForm</th>
+                <th>IdUser</th>
+                <th>ServiceDemande</th>
+                <th>NumTel</th>
+                <th>DateLimite</th>
+                <th>Status</th>
+                <th>DateCreation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formulaire in formulaires %}
+            <tr>
+                <td>{{ formulaire.idForm }}</td>
+                <td>{{ formulaire.idUser }}</td>
+                <td>{{ formulaire.serviceDemande }}</td>
+                <td>{{ formulaire.numTel }}</td>
+                <td>{{ formulaire.dateLimite }}</td>
+                <td>{{ formulaire.status }}</td>
+                <td>{{ formulaire.dateCreation ? formulaire.dateCreation|date('Y-m-d') : '' }}</td>
+                <td>
+
+                    <button class="btn" ><a  href="{{ path('formulaire_show', {'idForm': formulaire.idForm}) }}">show</a></button>
+                    <button class="btn" ><a href="{{ path('formulaire_edit', {'idForm': formulaire.idForm}) }}">edit</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('formulaire_new') }}">Create new</a>
+{% endblock %}
