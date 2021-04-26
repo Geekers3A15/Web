@@ -1,0 +1,243 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <!-- slider Area Start-->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="single-slider slider-height2  hero-overly d-flex align-items-center" data-background="{{asset('img/hero/eventheader.jpg')}}">
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Bienvenue à cette événement!</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--================Blog Area =================-->
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <img  style height="1000px" width="800px" class="img-fluid" src="{{asset( evenement.imageEvent )}}" alt="">
+                        </div>
+                        <div class="blog_details">
+                            <h2>{{ evenement.titreEvent }}
+                            </h2>
+                            <ul class="blog-info-link mt-3 mb-4">
+                                <li><i class="fa fa-paper-plane"></i> {{ evenement.categorie }}</a></li>
+                            </ul>
+                            <p class="excert">
+
+                                {{ evenement.description }}
+                            </p>
+                            <div class="quote-wrapper">
+                                <div class="quotes">
+                                    <p style="color:#1F1F1F "> Cet événement de  {{ evenement.titreEvent }} est dû le {{ evenement.dateDeb}} et se termine le {{ evenement.dateFin }}
+                                        <br>
+                                        Le prix pour l'atteindre est de {{ evenement.prix }} dt.
+                                        <br>
+                                        Dépêchez-vous et prenez vos tickets!
+                                        <br>
+                                        Nombre limite : {{ evenement.nbMax }}
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="navigation-area">
+                                <div class="row">
+                                    <div
+                                            class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                        <div class="thumb">
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/preview.png" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="arrow">
+                                            <a href="#">
+                                                <span class="lnr text-white ti-arrow-left"></span>
+                                            </a>
+                                        </div>
+                                        <div class="detials">
+                                            <p>Prev Post</p>
+                                            <a href="#">
+                                                <h4>Space The Final Frontier</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                                        <div class="detials">
+                                            <p>Next Post</p>
+                                            <a href="#">
+                                                <h4>Telescopes 101</h4>
+                                            </a>
+                                        </div>
+                                        <div class="arrow">
+                                            <a href="#">
+                                                <span class="lnr text-white ti-arrow-right"></span>
+                                            </a>
+                                        </div>
+                                        <div class="thumb">
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/next.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <h1>Le nombre maximales de participants:</h1>
+                                        <h2>{{ evenement.nbMax }}</h2>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </aside>
+
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Category</h4>
+                            <ul>
+                                <li><i class="fa fa-paper-plane"></i> {{ evenement.categorie }}</li>
+                            </ul>
+                        </aside>
+                        {% if app.user.role=="client"  %}
+                            <aside class="single_sidebar_widget post_category_widget">
+
+                                        {% if participations is null %}
+                                            <form method="POST" action="{{ path('PartEvent', {'idUser': app.user.idUser , 'idEvent': evenement.idEvent}) }}">
+                                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                        type="submit" name="participer" id="participer">Participer</button></form>
+                                            {% else %}
+                                                <form method="POST" action="{{ path('nepasPartEvent', {'idUser': app.user.idUser , 'idEvent': evenement.idEvent}) }}">
+                                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                            type="submit"style="display: block" name="nepasparticiper" id="nepasparticiper">Ne pas participer</button>
+                                                </form>
+                                        {% endif %}
+
+
+
+                                {#    <script>
+                                        if (document.getElementById('nepasparticiper').style.display == "block") {
+                                            document.getElementById('participer').style.display = "none";
+
+                                        }else{
+                                                document.getElementById('participer').style.display = "block";
+                                            document.getElementById('nepasparticiper').style.display = "none";
+                                        }
+
+
+                                    </script>#}
+
+                            </aside>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- ================ Map ================= -->
+            <section class="contact-sections">
+                <div class="d-area">
+                    {#<div id="map" style="height: 500px; position: relative; overflow: hidden;">
+                <script>
+                    function initMap() {
+                        var uluru = {
+                            lat: -25.363,
+                            lng: 131.044
+                        };
+                        var grayStyles = [{
+                            featureType: "all",
+                            stylers: [{
+                                saturation: -90
+                            },
+                                {
+                                    lightness: 50
+                                }
+                            ]
+                        },
+                            {
+                                elementType: 'labels.text.fill',
+                                stylers: [{
+                                    color: '#ccdee9'
+                                }]
+                            }
+                        ];
+                        let map;
+                         new google.maps.Map(document.getElementById('map'), {
+                            center: {
+                                lat: -31.197,
+                                lng: 150.744
+                            },
+                            zoom: 9,
+                            styles: grayStyles,
+                            scrollwheel: false
+                        });
+                    }
+                </script>#}
+                    {# <script>
+                    const KEY = "AIzaSyDoSHY5J9cI_UseyARaE8y6_AErpG71MDg";
+                    const LAT = 50.1;
+                    const LNG = -97.3;
+                    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${LAT},${LNG}&key=${KEY}`;
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            let parts = data.results[0].address_components;
+                            document.body.insertAdjacentHTML(
+                                "beforeend",
+                                `<p>Formatted: ${data.results[0].formatted_address}</p>`
+                            );
+                            parts.forEach(part => {
+                                if (part.types.includes("country")) {
+                                    //we found "country" inside the data.results[0].address_components[x].types array
+                                    document.body.insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p>COUNTRY: ${part.long_name}</p>`
+                                    );
+                                }
+                                if (part.types.includes("administrative_area_level_1")) {
+                                    document.body.insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p>PROVINCE: ${part.long_name}</p>`
+                                    );
+                                }
+                                if (part.types.includes("administrative_area_level_3")) {
+                                    document.body.insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p>LEVEL 3: ${part.long_name}</p>`
+                                    );
+                                }
+                            });
+                        })
+                        .catch(err => console.warn(err.message));
+                                 </script>#}
+                </div>
+
+    </section>
+    <!-- ================ Map ================= -->
+    </div>
+
+    </section>
+
+
+{% endblock %}

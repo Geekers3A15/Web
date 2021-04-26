@@ -82,10 +82,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
+
+        }
+        if($token->getUser()->getRole() == "artiste"){
+            return new RedirectResponse($this->urlGenerator->generate('evenement_event'));
+        }
+        elseif($token->getUser()->getRole() == "client"){
+            return new RedirectResponse($this->urlGenerator->generate('evenement_eventclient'));
+        }
+        elseif($token->getUser()->getRole() == "admin"){
+            return new RedirectResponse($this->urlGenerator->generate('evenement_eventsadmin'));
         }
 
 
-        return new RedirectResponse($this->urlGenerator->generate('evenement_event'));
     }
 
     protected function getLoginUrl()

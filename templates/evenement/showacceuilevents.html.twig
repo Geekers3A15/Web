@@ -4,12 +4,12 @@
 <!-- slider Area Start-->
 <div class="slider-area ">
     <!-- Mobile Menu -->
-    <div class="single-slider slider-height2  hero-overly d-flex align-items-center" data-background="assets/img/hero/about_hero.jpg">
+    <div class="single-slider slider-height2  hero-overly d-flex align-items-center" data-background="{{asset('img/hero/eventheader.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Our Gallery</h2>
+                        <h2>Tous les événements</h2>
                     </div>
                 </div>
             </div>
@@ -27,9 +27,9 @@
 
             <div class="col-lg-8 mb-5 mb-lg-0">
 
-                <div class="blog_left_sidebar">
-                    {% for evenement in evenements %}
-
+                <div class="blog_left_sidebar" >
+                    <h1 ({{ events.getTotalItemCount }})></h1>
+                    {% for evenement in events %}
                     <article class="blog_item">
                         <div class="blog_item_img">
                             <img class="card-img rounded-0"  src="{{asset( evenement.imageEvent )}}" alt="">
@@ -39,9 +39,12 @@
                                 <p>Date fin : {{ evenement.dateFin }}</p>
                             </div>
                         </div>
-
                         <div class="blog_details">
+                            {% if app.user.role =='artiste' %}
                             <a class="d-inline-block" href="{{ path('evenement_singleshowevent', {'idEvent': evenement.idEvent}) }}">
+                            {% else %}
+                                <a class="d-inline-block" href="{{ path('evenement_singleshoweventclient', {'idEvent': evenement.idEvent , 'idUser': app.user.idUser}) }}">
+                                {% endif %}
                                 <h2>{{ evenement.titreEvent }}</h2>
                             </a>
                             <p class="desc">{{ evenement.description }}</p>
@@ -49,8 +52,10 @@
                                 <li><i class="fa fa-paper-plane"></i> {{ evenement.categorie }}</a></li>
                             </ul>
                         </div>
+
                     </article>
                     {% endfor %}
+                    {{ knp_pagination_render(events) }}
 
 
 

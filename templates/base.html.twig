@@ -53,7 +53,7 @@
                     <div class="col-xl-10 col-lg-10 col-md-10">
                         <!-- Main-menu -->
                         <div class="main-menu f-right d-none d-lg-block">
-                            {% if app.user %}
+                            {% if app.user and app.user.role=="artiste" %}
                             <nav>
                                 <ul id="navigation">
                                     <li class="active"><a href=""> Accueil</a></li>
@@ -65,7 +65,20 @@
                                     <li><a href=>Notre story</a></li>
                                 </ul>
                             </nav>
+                                {% elseif  app.user and app.user.role == "client" %}
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li class="active"><a href=""> Accueil</a></li>
+                                            <li><a href="">Profil</a></li>
+                                            <li><a href="/evenement/acceuileventclient">Evenements</a></li>
+                                            <li><a href="">Reservation</a></li>
+                                            <li><a href="">Produits artistiques</a></li>
+                                            <li><a href="">Competitions</a></li>
+                                            <li><a href=>Notre story</a></li>
+                                        </ul>
+                                    </nav>
                             {% endif %}
+
                         </div>
                     </div>
                     <!-- Mobile Menu -->
@@ -108,42 +121,30 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p class="info1">Seddo eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="info1">“Provoquer, au sens artistique du terme, oblige à ouvrir les yeux, à casser le monde dans lequel on vit pour réfléchir.” <br>
+                                            ~Elisabeth Badinter </p>
 
-                                        <p class="info2">theaisle@elated-themes.com</p>
-                                        <p class="info2">+(123) 456 - 7890 - 456 - 7890</p>
-                                        <p class="info2"> 35 W 46nd Street New York</p>
+                                        <p class="info2">artcom.geekers@gmail.com</p>
+                                        <br>
+                                        <p class="info2"> 1, 2 rue André Ampère - 2083 - Pôle Technologique - El Ghazala.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-7">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>WEDDING PLANNER FAQS</h4>
-                                <ul>
-                                    <li><a href="#">Why Hire a Planner?</a></li>
-                                    <li><a href="#">How Can I Make An</a></li>
-                                    <li><a href="#">Appointment?</a></li>
-                                    <li><a href="#">How to Choose a Venue</a></li>
-                                    <li><a href="#">Event Catalogue</a></li>
-                                    <li><a href="#"> Accept</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
+
                     <div class="col-xl-2 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>ABOUT US</h4>
+                                <h4>GEEKERS</h4>
                                 <ul>
-                                    <li><a href="#">Bridesmaids</a></li>
-                                    <li><a href="#">November 22, 2020</a></li>
-                                    <li><a href="#">Groomsmen</a></li>
-                                    <li><a href="#">November 22, 2020</a></li>
-                                    <li><a href="#">JEWELRY</a></li>
-                                    <li><a href="#">November 22, 2020</a></li>
+                                    <li><a href="#">Msallem Farah</a></li>
+                                    <li><a href="#">Gharbi Sawssen</a></li>
+                                    <li><a href="#">Aouni Sirine</a></li>
+                                    <li><a href="#">Balti Khaled</a></li>
+                                    <li><a href="#">Ben Messaoud Hédi</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -151,7 +152,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Instagram</h4>
+                                <h4>Photos</h4>
                             </div>
                             <div class="instagram-gellay">
                                 <ul class="insta-feed">
@@ -205,6 +206,8 @@
 <script src="{{asset('js/slick.min.js')}}"></script>
 <!-- Date Picker -->
 <script src="{{asset('js/gijgo.min.js')}}"></script>
+
+
 <!-- One Page, Animated-HeadLin -->
 <script src="{{asset('js/wow.min.js')}}"></script>
 <script src="{{asset('js/animated.headline.js')}}"></script>

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -28,13 +29,16 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="titre_event", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="titre est obligatoire")
      */
+
     private $titreEvent;
 
     /**
      * @var string
      *
      * @ORM\Column(name="image_event", type="string", length=255, nullable=false)
+     *
      */
     private $imageEvent;
 
@@ -42,12 +46,14 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="categorie", type="string", length=255, nullable=false)
+     *  @Assert\NotBlank(message="categorie est obligatoire")
      */
     private $categorie;
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=false)
+     *  @Assert\NotBlank(message="description est obligatoire")
      */
     private $description;
 
@@ -57,6 +63,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="date_deb", type="string", length=255, nullable=false)
+     *@Assert\NotBlank(message="date début est obligatoire")
      */
     private $dateDeb;
 
@@ -64,6 +71,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="date_fin", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="date fin est obligatoire")
      */
     private $dateFin;
 
@@ -71,6 +79,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="location", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="localisation est obligatoire")
      */
     private $location;
 
@@ -78,6 +87,7 @@ class Evenement
      * @var int
      *
      * @ORM\Column(name="nb_max", type="integer", nullable=false)
+     * @Assert\NotBlank(message="nombre max est obligatoire")
      */
     private $nbMax;
 
@@ -85,6 +95,7 @@ class Evenement
      * @var int
      *
      * @ORM\Column(name="prix", type="integer", nullable=false)
+     * @Assert\NotBlank(message="prix est obligatoire")
      */
     private $prix;
 
@@ -104,7 +115,7 @@ class Evenement
      * @ORM\ManyToMany(targetEntity="User", inversedBy="idEvenement")
      * @ORM\JoinTable(name="participation",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="id_evenement", referencedColumnName="id_event")
+     *     @ORM\JoinColumn(name="id_event", referencedColumnName="id_event")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="id_client", referencedColumnName="id_user")
@@ -213,9 +224,10 @@ class Evenement
     /**
      * @param string $dateDeb
      */
-    public function setDateDeb(?string $dateDeb): void
+    public function setDateDeb($dateDeb): void
     {
         $this->dateDeb = $dateDeb;
+
     }
 
     /**
@@ -229,7 +241,7 @@ class Evenement
     /**
      * @param string $dateFin
      */
-    public function setDateFin(?string $dateFin): void
+    public function setDateFin($dateFin): void
     {
         $this->dateFin = $dateFin;
     }

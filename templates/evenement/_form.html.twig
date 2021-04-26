@@ -1,4 +1,99 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+
+<div class="row">
+        <div >
+            {{ form_label(form.titreEvent, 'Titre') }}
+            <div style="color: red">
+                {{ form_errors(form.titreEvent) }}
+            </div>
+
+            {{ form_widget(form.titreEvent) }}
+        </div></div>
+<div class="row">
+    <div  id="some-custom-id">
+        {{ form_label(form.imageEvent, 'Image') }}
+
+        <div style="color: red">
+            {{ form_errors(form.imageEvent) }}
+        </div>
+        {{ form_widget(form.imageEvent) }}
+    </div>
+</div>
+<div class="row">
+    <div  id="some-custom-id">
+        {{ form_label(form.categorie, 'Categorie') }}
+
+        <div style="color: red">
+            {{ form_errors(form.categorie) }}
+        </div>
+        {{ form_widget(form.categorie) }}
+    </div>
+</div>
+
+<div class="row">
+    <div  id="some-custom-id">
+        {{ form_label(form.description, 'Description') }}
+
+        <div style="color: red">
+            {{ form_errors(form.description) }}
+        </div>
+        {{ form_widget(form.description) }}
+    </div>
+</div>
+<div class="row">
+    <div>
+        {{ form_label(form.dateDeb, 'Date début') }}
+
+        <div style="color: red">
+            {{ form_errors(form.dateDeb) }}
+        </div>
+        {{ form_widget(form.dateDeb) }}
+    </div>
+</div>
+<div class="row">
+    <div id="some-custom-id">
+        {{ form_label(form.dateFin, 'Date fin') }}
+
+        <div style="color: red">
+            {{ form_errors(form.dateFin) }}
+        </div>
+        {{ form_widget(form.dateFin) }}
+    </div>
+</div>
+<div class="row">
+    <div  id="some-custom-id">
+        {{ form_label(form.location, 'Localisation') }}
+
+        <div style="color: red">
+            {{ form_errors(form.location) }}
+        </div>
+        {{ form_widget(form.location) }}
+    </div>
+</div>
+<div class="row">
+    <div  id="some-custom-id">
+        {{ form_label(form.nbMax, 'Nombre max') }}
+
+        <div style="color: red">
+            {{ form_errors(form.nbMax) }}
+        </div>
+        {{ form_widget(form.nbMax) }}
+    </div>
+</div>
+<div class="row">
+    <div  id="some-custom-id">
+        {{ form_label(form.prix, 'Prix') }}
+
+        <div style="color: red">
+            {{ form_errors(form.prix) }}
+        </div>
+        {{ form_widget(form.prix) }}
+    </div>
+</div>
+<br>
+
+
+    <button class="btn">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}

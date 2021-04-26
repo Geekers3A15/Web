@@ -45,5 +45,5 @@
 
 
 
-<button class="btn"><a href="{{ path('evenement_index') }}">back to list</a></button>
+<button class="btn"><a href="{{ path('evenement_index', {'idUser': app.user.idUser}) }}">back to list</a></button>
 {% endblock %}

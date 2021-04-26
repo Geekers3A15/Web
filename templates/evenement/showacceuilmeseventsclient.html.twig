@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <!-- slider Area Start-->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="single-slider slider-height2  hero-overly d-flex align-items-center" data-background="{{asset('img/hero/eventheader.jpg')}}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Mes événements</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider End -->
+
+
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-8 mb-5 mb-lg-0">
+
+                    <div class="blog_left_sidebar">
+                        {% for evenement in events %}
+                                {% for participation in participations %}
+                                    {% if evenement == participation.idEvent %}
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0"  src="{{asset( evenement.imageEvent )}}" alt="">
+
+                                    <div class="blog_item_date">
+                                        <p>Date début : {{ evenement.dateDeb}}</p>
+                                        <p>Date fin : {{ evenement.dateFin }}</p>
+                                    </div>
+                                </div>
+                                <div class="blog_details">
+                                    {% if app.user.role =='artiste' %}
+                                    <a class="d-inline-block" href="{{ path('evenement_singleshowevent', {'idEvent': evenement.idEvent}) }}">
+                                        {% else  %}
+                                        <a class="d-inline-block" href="{{ path('evenement_singleshoweventclient', {'idEvent': evenement.idEvent , 'idUser': app.user.idUser}) }}">
+                                            {% endif %}
+                                            <h2>{{ evenement.titreEvent }}</h2>
+                                        </a>
+                                        <p class="desc">{{ evenement.description }}</p>
+                                        <ul class="blog-info-link">
+                                            <li><i class="fa fa-paper-plane"></i> {{ evenement.categorie }}</a></li>
+                                    </ul>
+                                </div>
+
+                            </article>
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+                            {{ knp_pagination_render(events)}}
+
+
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form method="POST">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="titre" placeholder='rechercher par titre'
+                                               onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'rechercher par titre'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                        type="submit">recherche</button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+{% endblock %}

@@ -6,32 +6,29 @@
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2  hero-overly d-flex align-items-center" data-background="assets/img/hero/about_hero.jpg">
+        <div class="single-slider slider-height2  hero-overly d-flex align-items-center" data-background="{{asset('img/hero/eventheader.jpg')}}">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Our Gallery</h2>
+                            <h2>Mes événements</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <h1>Evenement index</h1>
-
     <table class="table">
         <thead>
             <tr>
-                <th>IdEvent</th>
-                <th>TitreEvent</th>
-                <th>ImageEvent</th>
+                <th>Titre</th>
+                <th>Image</th>
                 <th>Categorie</th>
                 <th>Description</th>
-                <th>DateDeb</th>
-                <th>DateFin</th>
-                <th>Location</th>
-                <th>NbMax</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Localisation</th>
+                <th>Nombre max</th>
                 <th>Prix</th>
                 <th>actions</th>
             </tr>
@@ -39,7 +36,6 @@
         <tbody>
         {% for evenement in evenements %}
             <tr>
-                <td>{{ evenement.idEvent }}</td>
                 <td>{{ evenement.titreEvent }}</td>
                 <td>{{ evenement.imageEvent }}</td>
                 <td>{{ evenement.categorie }}</td>
@@ -50,8 +46,9 @@
                 <td>{{ evenement.nbMax }}</td>
                 <td>{{ evenement.prix }}</td>
                 <td>
-                    <button class="btn"><a href="{{ path('evenement_show', {'idEvent': evenement.idEvent}) }}">show</a></button>
+                    <button class="btn"><a href="{{ path('evenement_singleshowevent', {'idEvent': evenement.idEvent}) }}">show</a></button>
                     <button class="btn"><a href="{{ path('evenement_edit', {'idEvent': evenement.idEvent}) }}">edit</a></button>
+                    {{ include('evenement/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

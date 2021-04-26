@@ -111,6 +111,7 @@
 
                         </form>
                     </aside>
+
                     <aside class="single_sidebar_widget post_category_widget">
                         <h4 class="widget_title">Category</h4>
                                 <ul>
@@ -125,7 +126,7 @@
         <!-- ================ Map ================= -->
         <section class="contact-sections">
             <div class="d-area">
-                <div id="map" style="height: 500px; position: relative; overflow: hidden;"></div>
+                {#<div id="map" style="height: 500px; position: relative; overflow: hidden;">
                 <script>
                     function initMap() {
                         var uluru = {
@@ -149,7 +150,8 @@
                                 }]
                             }
                         ];
-                        var map = new google.maps.Map(document.getElementById('map'), {
+                        let map;
+                         new google.maps.Map(document.getElementById('map'), {
                             center: {
                                 lat: -31.197,
                                 lng: 150.744
@@ -159,10 +161,47 @@
                             scrollwheel: false
                         });
                     }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIC3k538pV6K_RK9qIuFLhy1wzjK8SyI8&callback=initMap">
-                </script>
+                </script>#}
+               {# <script>
+                    const KEY = "AIzaSyDoSHY5J9cI_UseyARaE8y6_AErpG71MDg";
+                    const LAT = 50.1;
+                    const LNG = -97.3;
+                    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${LAT},${LNG}&key=${KEY}`;
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            let parts = data.results[0].address_components;
+                            document.body.insertAdjacentHTML(
+                                "beforeend",
+                                `<p>Formatted: ${data.results[0].formatted_address}</p>`
+                            );
+                            parts.forEach(part => {
+                                if (part.types.includes("country")) {
+                                    //we found "country" inside the data.results[0].address_components[x].types array
+                                    document.body.insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p>COUNTRY: ${part.long_name}</p>`
+                                    );
+                                }
+                                if (part.types.includes("administrative_area_level_1")) {
+                                    document.body.insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p>PROVINCE: ${part.long_name}</p>`
+                                    );
+                                }
+                                if (part.types.includes("administrative_area_level_3")) {
+                                    document.body.insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p>LEVEL 3: ${part.long_name}</p>`
+                                    );
+                                }
+                            });
+                        })
+                        .catch(err => console.warn(err.message));
+                                 </script>#}
             </div>
+
         </section>
         <!-- ================ Map ================= -->
     </div>

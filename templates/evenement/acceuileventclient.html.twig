@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <!-- slider Area End-->
+    <!-- Services Area Start-->
+    <div class="service-area ">
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-4" style="margin-left: 200px;"        onclick="location.href='/evenement/showacceuilevent';">
+                    <div class="singl-services text-center mb-60">
+                        <div class="top-caption">
+                            <h4 style="text-align: center">Tous les événements</h4>
+                        </div>
+                        <div class="services-img " >
+
+                            <img style height="237px" width="237px" src="{{asset('img/service/allevents.jpg')}}" alt="">
+                            <div class="back-flower">
+                                <img src="{{asset('img/service/services_flower1.png')}}" alt="">
+                            </div>
+
+                        </div>
+                        <div class="bottom-caption">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" >
+                    <div class="singl-services text-center mb-60">
+                        <div class="top-caption">
+                            <h4 style="text-align: center">Mes événements</h4>
+                        </div>
+                        <div class="services-img">
+                            <img style height="237px" width="237px" src="{{asset('img/service/mesevents.jpg')}}" onclick="location.href='/evenement/showacceuilmeseventsclient/'+{{app.user.idUser}};">
+                            <div class="back-flower">
+                                <img src="{{asset('img/service/services_flower1.png')}}" alt="">
+                            </div>
+                        </div>
+                        <div class="bottom-caption">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
